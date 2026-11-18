@@ -1,0 +1,5 @@
+{# Comentario escrito por un usuario. Necesita: comentario. Opcional: mostrar_tarea #}
+<li>
+    {% if mostrar_tarea %}En "{{ comentario.tarea.titulo }}": {% endif %}{{ comentario.texto }}
+    ({{ comentario.fecha_comentario|date:"d/m/Y" }})
+</li>

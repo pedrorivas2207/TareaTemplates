@@ -1,0 +1,8 @@
+{# Muestra el estado de una tarea como etiqueta de color. Necesita: tarea #}
+{% if tarea.estado == 'CO' %}
+    <span class="estado estado-completada">{{ tarea.get_estado_display }}</span>
+{% elif tarea.estado == 'PR' %}
+    <span class="estado estado-progreso">{{ tarea.get_estado_display }}</span>
+{% else %}
+    <span class="estado estado-pendiente">{{ tarea.get_estado_display }}</span>
+{% endif %}

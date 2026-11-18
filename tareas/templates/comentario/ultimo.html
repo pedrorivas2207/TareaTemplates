@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Último comentario del proyecto {{ id_proyecto }}</h1>
+{% endblock %}
+
+{% block contenido %}
+{% for c in comentarios %}
+    <div class="tarjeta {% cycle 'fila-impar' 'fila-par' %}">
+        {% include 'parciales/comentario_ultimo_item.html' with comentario=c %}
+    </div>
+{% empty %}
+    <p class="vacio">Este proyecto todavía no tiene comentarios.</p>
+{% endfor %}
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

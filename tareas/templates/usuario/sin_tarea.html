@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Usuarios sin ninguna tarea asignada</h1>
+{% endblock %}
+
+{% block contenido %}
+{% for u in usuarios %}
+    <div class="tarjeta {% cycle 'fila-impar' 'fila-par' %}">
+        {% include 'parciales/usuario_sin_tarea_item.html' with usuario=u %}
+    </div>
+{% empty %}
+    <p class="vacio">Todos los usuarios tienen alguna tarea.</p>
+{% endfor %}
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

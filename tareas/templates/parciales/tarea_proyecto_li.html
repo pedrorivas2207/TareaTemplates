@@ -1,0 +1,9 @@
+{# Tarea dentro de la lista de un proyecto. Necesita: tarea. Opcional: mostrar_creador #}
+<li>
+    <strong>{{ tarea.titulo }}</strong>
+    {% include 'parciales/estado_badge.html' with tarea=tarea %}
+    {% if tarea.estado in "PE PR" %}<small>(abierta)</small>{% endif %}
+    · creada el {{ tarea.fecha_creacion|date:"d/m/Y" }}
+    {% if mostrar_creador %}· por {{ tarea.creador.nombre }}{% endif %}
+    · Etiquetas: {% include 'parciales/etiquetas_inline.html' with etiquetas=tarea.etiquetas.all %}
+</li>

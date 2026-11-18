@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Tareas completadas entre {{ anyo_inicio }} y {{ anyo_fin }}</h1>
+{% endblock %}
+
+{% block contenido %}
+{% for t in tareas %}
+    <div class="tarjeta {% cycle 'fila-impar' 'fila-par' %}">
+        {% include 'parciales/tarea_resumen.html' with tarea=t %}
+    </div>
+{% empty %}
+    <p class="vacio">No hay tareas completadas en ese periodo.</p>
+{% endfor %}
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

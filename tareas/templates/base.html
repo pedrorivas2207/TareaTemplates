@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+    {# CSS global del proyecto #}
+    <link rel="stylesheet" href="{% static 'tareas/css/estilos.css' %}">
+</head>
+<body>
+    {# Template 1: menú de navegación superior #}
+    {% include 'componentes/menu_navegacion.html' %}
+
+    {# Block 1: cabecera de cada página #}
+    <header class="cabecera">
+        {% block cabecera %}
+            <h1>Gestión de Tareas</h1>
+        {% endblock %}
+    </header>
+
+    {# Block 2: contenido de cada página #}
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+
+    {# Template 2: pie de página #}
+    {% include 'componentes/pie_pagina.html' %}
+
+    <button id="volver-arriba" title="Volver arriba">↑</button>
+
+    {# JavaScript global del proyecto #}
+    <script src="{% static 'tareas/js/script.js' %}"></script>
+</body>
+</html>

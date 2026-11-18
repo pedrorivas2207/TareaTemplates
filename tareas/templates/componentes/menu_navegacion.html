@@ -1,0 +1,41 @@
+{% load static %}
+<nav class="menu">
+    <a class="marca" href="{% url 'index' %}">
+        <img src="{% static 'tareas/img/logo.png' %}" alt="Logo de Gestión de Tareas">
+        Gestión de Tareas
+    </a>
+    <ul>
+        <li><a href="{% url 'index' %}" {% if request.resolver_match.url_name == 'index' %}class="activo"{% endif %}>Inicio</a></li>
+        <li><a href="{% url 'lista_proyectos' %}" {% if request.resolver_match.url_name == 'lista_proyectos' %}class="activo"{% endif %}>Proyectos</a></li>
+        <li>
+            <details>
+                <summary>Tareas ▾</summary>
+                <ul class="submenu">
+                    <li><a href="{% url 'dame_tarea' 1 %}">Detalle de la tarea 1</a></li>
+                    <li><a href="{% url 'tareas_completadas' 2023 2024 %}">Completadas 2023-2024</a></li>
+                    <li><a href="{% url 'buscar_tareas' 'reservas' %}">Buscar «reservas»</a></li>
+                </ul>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>Proyectos ▾</summary>
+                <ul class="submenu">
+                    <li><a href="{% url 'ultimo_comentario' 7 %}">Último comentario del proyecto 7</a></li>
+                    <li><a href="{% url 'estadisticas_proyecto' 7 %}">Estadísticas del proyecto 7</a></li>
+                </ul>
+            </details>
+        </li>
+        <li>
+            <details>
+                <summary>Usuarios ▾</summary>
+                <ul class="submenu">
+                    <li><a href="{% url 'usuarios_sin_tarea' %}">Usuarios sin tarea</a></li>
+                    <li><a href="{% url 'ficha_usuario' 1 %}">Ficha del usuario 1</a></li>
+                    <li><a href="{% url 'ultimos_comentarios_usuario' 1 %}">Comentarios del usuario 1</a></li>
+                </ul>
+            </details>
+        </li>
+        <li><a href="{% url 'asignaciones_observaciones' 'diseño' %}">Asignaciones</a></li>
+    </ul>
+</nav>

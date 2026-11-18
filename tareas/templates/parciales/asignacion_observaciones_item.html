@@ -1,0 +1,25 @@
+{# Contenido de cada asignación en la búsqueda por observaciones. Necesita: asignacion #}
+<h2>{{ asignacion.tarea.titulo }}</h2>
+<p>
+    Observaciones: {{ asignacion.observaciones }}
+    <small>({{ asignacion.observaciones|wordcount }} palabra{{ asignacion.observaciones|wordcount|pluralize }}
+    · {{ asignacion.observaciones|yesno:"con observaciones,sin observaciones" }})</small>
+</p>
+<p>Asignada el {{ asignacion.fecha_asignacion|date:"d/m/Y" }}</p>
+
+<h3>Usuario asignado</h3>
+<p>{{ asignacion.usuario.nombre }} ({{ asignacion.usuario.correo }})</p>
+{% if asignacion.usuario.perfil and asignacion.usuario.perfil.telefono %}
+    <p>Teléfono: {{ asignacion.usuario.perfil.telefono }}</p>
+{% endif %}
+<p>Biografía: {% firstof asignacion.usuario.perfil.biografia "Sin biografía" %}</p>
+
+<h3>Tarea</h3>
+<p>{{ asignacion.tarea.descripcion }}</p>
+<p>
+    Estado: {% include 'parciales/estado_badge.html' with tarea=asignacion.tarea %}
+    · creada el {{ asignacion.tarea.fecha_creacion|date:"d/m/Y" }}
+</p>
+<p>Creador de la tarea: {{ asignacion.tarea.creador.nombre }}</p>
+<p>Proyecto: {{ asignacion.tarea.proyecto.nombre }} - {{ asignacion.tarea.proyecto.descripcion }}</p>
+<p>Etiquetas: {% include 'parciales/etiquetas_inline.html' with etiquetas=asignacion.tarea.etiquetas.all %}</p>

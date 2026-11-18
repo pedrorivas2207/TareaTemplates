@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Tareas que contienen "{{ texto }}" en el título o la descripción</h1>
+{% endblock %}
+
+{% block contenido %}
+{% for t in tareas %}
+    <div class="tarjeta {% cycle 'fila-impar' 'fila-par' %}">
+        {% include 'parciales/tarea_resumen.html' with tarea=t %}
+    </div>
+{% empty %}
+    <p class="vacio">No hay tareas que contengan ese texto.</p>
+{% endfor %}
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Error 400</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <p>Petición incorrecta: el servidor no ha podido entender lo que has enviado.</p>
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</div>
+{% endblock %}

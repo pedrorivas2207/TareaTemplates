@@ -1,0 +1,10 @@
+{# Contenido de cada comentario en la lista de últimos comentarios de un usuario. Necesita: comentario #}
+<h2>{{ comentario.texto|truncatechars:90 }}</h2>
+<p>Comentado el {{ comentario.fecha_comentario|date:"d/m/Y" }}</p>
+
+<h3>Tarea</h3>
+<p>{{ comentario.tarea.titulo }} {% include 'parciales/estado_badge.html' with tarea=comentario.tarea %}</p>
+<p>{{ comentario.tarea.descripcion }}</p>
+<p>Creador de la tarea: {{ comentario.tarea.creador.nombre }}</p>
+<p>Proyecto: {{ comentario.tarea.proyecto.nombre }} - {{ comentario.tarea.proyecto.descripcion }}</p>
+<p>Etiquetas: {% include 'parciales/etiquetas_inline.html' with etiquetas=comentario.tarea.etiquetas.all %}</p>

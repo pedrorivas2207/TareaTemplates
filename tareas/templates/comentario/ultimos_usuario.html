@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Últimos comentarios de {{ usuario.nombre }}</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <p>Correo: {{ usuario.correo }}</p>
+    <p>Teléfono: {{ usuario.perfil.telefono }}</p>
+    <p>Biografía: {% firstof usuario.perfil.biografia "Sin biografía" %}</p>
+    <p>Alta: {{ usuario.perfil.fecha_alta|date:"d/m/Y" }}</p>
+</div>
+
+{% for c in comentarios %}
+    <div class="tarjeta {% cycle 'fila-impar' 'fila-par' %}">
+        {% include 'parciales/comentario_usuario_item.html' with comentario=c %}
+    </div>
+{% empty %}
+    <p class="vacio">Este usuario no ha escrito ningún comentario.</p>
+{% endfor %}
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

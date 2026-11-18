@@ -1,0 +1,33 @@
+{# Contenido de cada tarea en los listados de tareas (buscar y completadas). Necesita: tarea #}
+<h2>{{ tarea.titulo }}</h2>
+<p>{{ tarea.descripcion|capfirst }}</p>
+<p>
+    Estado: {% include 'parciales/estado_badge.html' with tarea=tarea %}
+    {% if tarea.estado != 'CO' %}<small>· todavía sin completar</small>{% endif %}
+    · creada el {{ tarea.fecha_creacion|date:"d/m/Y" }}
+</p>
+<p>Creador: {{ tarea.creador.nombre }} ({{ tarea.creador.correo }})</p>
+<p>Proyecto: {{ tarea.proyecto.nombre }} - {{ tarea.proyecto.descripcion|truncatechars:80 }}</p>
+
+<h3>Etiquetas</h3>
+<ul>
+{% for e in tarea.etiquetas.all %}
+    {% include 'parciales/etiqueta_li.html' with etiqueta=e %}
+{% empty %}
+    <li class="vacio">Sin etiquetas.</li>
+{% endfor %}
+</ul>
+
+{% with n_asignados=tarea.asignacion_set.all|length %}
+    <h3>
+        Usuarios asignados ({{ n_asignados }})
+        {% if n_asignados > 1 %}<small>· tarea compartida</small>{% endif %}
+    </h3>
+    <ul>
+    {% for a in tarea.asignacion_set.all %}
+        {% include 'parciales/asignacion_tarea_li.html' with asignacion=a %}
+    {% empty %}
+        <li class="vacio">Nadie asignado.</li>
+    {% endfor %}
+    </ul>
+{% endwith %}

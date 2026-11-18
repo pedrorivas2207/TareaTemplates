@@ -1,0 +1,5 @@
+{# Comentario de una tarea con su autor. Necesita: comentario #}
+<li>
+    <strong>{{ comentario.autor.nombre }}</strong>: {{ comentario.texto|linebreaksbr }}
+    ({{ comentario.fecha_comentario|date:"d/m/Y" }})
+</li>

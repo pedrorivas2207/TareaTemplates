@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Asignaciones con "{{ texto }}" en las observaciones</h1>
+{% endblock %}
+
+{% block contenido %}
+{% for a in asignaciones %}
+    <div class="tarjeta {% cycle 'fila-impar' 'fila-par' %}">
+        {% include 'parciales/asignacion_observaciones_item.html' with asignacion=a %}
+    </div>
+{% empty %}
+    <p class="vacio">No hay asignaciones con ese texto en las observaciones.</p>
+{% endfor %}
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

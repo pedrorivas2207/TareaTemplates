@@ -1,0 +1,5 @@
+{# Tarea creada por un usuario. Necesita: tarea. Opcional: mostrar_fecha #}
+<li>
+    {{ tarea.titulo }} {% include 'parciales/estado_badge.html' with tarea=tarea %}
+    {% if mostrar_fecha %}· {{ tarea.fecha_creacion|date:"d/m/Y" }}{% endif %}
+</li>

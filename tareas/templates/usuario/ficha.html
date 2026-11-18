@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>{{ usuario.nombre }}</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <p>Correo: {{ usuario.correo }}</p>
+    <h2>Perfil</h2>
+    <p>Teléfono: {{ usuario.perfil.telefono }}</p>
+    <p>Biografía: {% firstof usuario.perfil.biografia "Sin biografía" %}</p>
+    <p>Alta: {{ usuario.perfil.fecha_alta|date:"d/m/Y" }}</p>
+</div>
+
+<div class="tarjeta">
+    <h2>Proyectos creados</h2>
+    <ul>
+    {% for p in usuario.proyectos_creados.all %}
+        {% include 'parciales/proyecto_creado_li.html' with proyecto=p mostrar_detalle=True %}
+    {% empty %}
+        <li class="vacio">Ninguno.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="tarjeta">
+    <h2>Tareas creadas</h2>
+    <ul>
+    {% for t in usuario.tareas_creadas.all %}
+        {% include 'parciales/tarea_creada_li.html' with tarea=t mostrar_fecha=True %}
+    {% empty %}
+        <li class="vacio">Ninguna.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="tarjeta">
+    <h2>Tareas asignadas</h2>
+    <ul>
+    {% for a in usuario.asignacion_set.all %}
+        {% include 'parciales/asignacion_usuario_li.html' with asignacion=a %}
+    {% empty %}
+        <li class="vacio">Ninguna.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="tarjeta">
+    <h2>Comentarios</h2>
+    <ul>
+    {% for c in usuario.comentarios.all %}
+        {% include 'parciales/comentario_usuario_li.html' with comentario=c mostrar_tarea=True %}
+    {% empty %}
+        <li class="vacio">Ninguno.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

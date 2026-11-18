@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Proyectos</h1>
+{% endblock %}
+
+{% block contenido %}
+{% for p in proyectos %}
+    <div class="tarjeta {% cycle 'fila-impar' 'fila-par' %}">
+        {% include 'parciales/proyecto_item.html' with proyecto=p %}
+    </div>
+{% empty %}
+    <p class="vacio">No hay proyectos.</p>
+{% endfor %}
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

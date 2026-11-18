@@ -1,0 +1,34 @@
+{# Contenido de cada usuario sin tareas asignadas. Necesita: usuario #}
+<h2>{{ usuario.nombre }} ({{ usuario.correo }})</h2>
+
+<h3>Perfil</h3>
+<p>Teléfono: {{ usuario.perfil.telefono }}</p>
+<p>Biografía: {% firstof usuario.perfil.biografia "Sin biografía" %}</p>
+<p>Alta: {{ usuario.perfil.fecha_alta|date:"d/m/Y" }}</p>
+
+<h3>Proyectos creados</h3>
+<ul>
+{% for p in usuario.proyectos_creados.all %}
+    {% include 'parciales/proyecto_creado_li.html' with proyecto=p %}
+{% empty %}
+    <li class="vacio">Ninguno.</li>
+{% endfor %}
+</ul>
+
+<h3>Tareas creadas</h3>
+<ul>
+{% for t in usuario.tareas_creadas.all %}
+    {% include 'parciales/tarea_creada_li.html' with tarea=t %}
+{% empty %}
+    <li class="vacio">Ninguna.</li>
+{% endfor %}
+</ul>
+
+<h3>Comentarios</h3>
+<ul>
+{% for c in usuario.comentarios.all %}
+    {% include 'parciales/comentario_usuario_li.html' with comentario=c %}
+{% empty %}
+    <li class="vacio">Ninguno.</li>
+{% endfor %}
+</ul>

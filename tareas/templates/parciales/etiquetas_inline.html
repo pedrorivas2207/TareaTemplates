@@ -1,0 +1,2 @@
+{# Lista de etiquetas en una sola línea. Necesita: etiquetas #}
+{% for e in etiquetas %}{{ e.nombre|lower }}{% if not forloop.last %}, {% endif %}{% empty %}ninguna{% endfor %}

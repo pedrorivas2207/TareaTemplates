@@ -1,0 +1,7 @@
+{# Usuario asignado a una tarea (con los datos de la tabla intermedia). Necesita: asignacion. Opcional: mostrar_correo #}
+<li>
+    <strong>{{ asignacion.usuario.nombre }}</strong>
+    {% if mostrar_correo %}({{ asignacion.usuario.correo }}){% endif %}
+    · asignado el {{ asignacion.fecha_asignacion|date:"d/m/Y" }}
+    · Observaciones: {{ asignacion.observaciones|default:"sin observaciones"|truncatechars:70 }}
+</li>

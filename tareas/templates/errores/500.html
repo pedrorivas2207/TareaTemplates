@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Error 500</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <p>Error interno del servidor. Inténtalo de nuevo más tarde.</p>
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</div>
+{% endblock %}

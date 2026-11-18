@@ -1,0 +1,16 @@
+{# Contenido de cada proyecto en la lista de proyectos. Necesita: proyecto #}
+<h2>{{ proyecto.nombre|upper }}</h2>
+<p>{{ proyecto.descripcion }}</p>
+<p>Inicio: {{ proyecto.fecha_inicio|date:"d/m/Y" }}</p>
+<p>Creador: {{ proyecto.creador.nombre }} ({{ proyecto.creador.correo }})</p>
+
+{% with total=proyecto.tareas.all|length %}
+    <h3>Tareas ({{ total }})</h3>
+    <ul>
+    {% for t in proyecto.tareas.all %}
+        {% include 'parciales/tarea_proyecto_li.html' with tarea=t mostrar_creador=True %}
+    {% empty %}
+        <li class="vacio">Sin tareas.</li>
+    {% endfor %}
+    </ul>
+{% endwith %}

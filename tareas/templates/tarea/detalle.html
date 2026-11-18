@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>{{ tarea.titulo }}</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <p>{{ tarea.descripcion }}</p>
+    <p>Estado: {% include 'parciales/estado_badge.html' with tarea=tarea %}</p>
+    <p>Creada el {{ tarea.fecha_creacion|date:"d/m/Y" }}</p>
+    <p>Creador: {{ tarea.creador.nombre }} ({{ tarea.creador.correo }})</p>
+    <p>Proyecto: {{ tarea.proyecto.nombre }} - {{ tarea.proyecto.descripcion }}
+       (inicio: {{ tarea.proyecto.fecha_inicio|date:"d/m/Y" }})</p>
+</div>
+
+<div class="tarjeta">
+    <h3>Etiquetas</h3>
+    <ul>
+    {% for e in tarea.etiquetas.all %}
+        {% include 'parciales/etiqueta_li.html' with etiqueta=e %}
+    {% empty %}
+        <li class="vacio">Sin etiquetas.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="tarjeta">
+    <h3>Usuarios asignados</h3>
+    <ul>
+    {% for a in tarea.asignacion_set.all %}
+        {% include 'parciales/asignacion_tarea_li.html' with asignacion=a mostrar_correo=True %}
+    {% empty %}
+        <li class="vacio">Nadie asignado.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="tarjeta">
+    <h3>Comentarios</h3>
+    <ul>
+    {% for c in tarea.comentarios.all %}
+        {% include 'parciales/comentario_li.html' with comentario=c %}
+    {% empty %}
+        <li class="vacio">Sin comentarios.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

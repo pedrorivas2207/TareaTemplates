@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Gestión de Tareas</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <h2>Páginas del proyecto</h2>
+    <ul>
+        <li>URL 1: <a href="{% url 'lista_proyectos' %}">Lista de proyectos</a></li>
+        <li>URL 2: <a href="{% url 'dame_tarea' 1 %}">Detalle de la tarea 1</a></li>
+        <li>URL 3: <a href="{% url 'tareas_completadas' 2023 2024 %}">Tareas completadas entre 2023 y 2024</a></li>
+        <li>URL 4: <a href="{% url 'buscar_tareas' 'reservas' %}">Tareas que contienen "reservas"</a></li>
+        <li>URL 5: <a href="{% url 'ultimo_comentario' 7 %}">Último comentario del proyecto 7</a></li>
+        <li>URL 6: <a href="{% url 'usuarios_sin_tarea' %}">Usuarios sin tarea</a></li>
+        <li>URL 7: <a href="{% url 'ficha_usuario' 1 %}">Ficha del usuario 1</a></li>
+        <li>URL 8: <a href="{% url 'estadisticas_proyecto' 7 %}">Estadísticas del proyecto 7</a></li>
+        <li>URL 9: <a href="{% url 'asignaciones_observaciones' 'diseño' %}">Asignaciones con "diseño" en las observaciones</a></li>
+        <li>URL 10: <a href="{% url 'ultimos_comentarios_usuario' 1 %}">Últimos 5 comentarios del usuario 1</a></li>
+    </ul>
+</div>
+
+<div class="tarjeta">
+    <h2>Páginas de error personalizadas</h2>
+    <ul>
+        <li>Error 400: <a href="{% url 'error_400' %}">Página de error 400</a></li>
+        <li>Error 403: <a href="{% url 'error_403' %}">Página de error 403</a></li>
+        <li>Error 404: <a href="/esta-pagina-no-existe/">Página de error 404</a></li>
+        <li>Error 500: <a href="{% url 'error_500' %}">Página de error 500</a></li>
+    </ul>
+</div>
+{% endblock %}

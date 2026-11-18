@@ -1,0 +1,5 @@
+{# Proyecto creado por un usuario. Necesita: proyecto. Opcional: mostrar_detalle #}
+<li>
+    {{ proyecto.nombre }}
+    {% if mostrar_detalle %}- {{ proyecto.descripcion }} (inicio: {{ proyecto.fecha_inicio|date:"d/m/Y" }}){% endif %}
+</li>

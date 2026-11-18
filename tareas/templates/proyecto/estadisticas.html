@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Estadísticas del proyecto {{ proyecto.nombre }}</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <p>{{ proyecto.descripcion }}</p>
+    <p>Inicio: {{ proyecto.fecha_inicio|date:"d/m/Y" }}</p>
+    <p>Creador: {{ proyecto.creador.nombre }} ({{ proyecto.creador.correo }})</p>
+</div>
+
+<div class="tarjeta">
+    <h2>Tareas</h2>
+    <p>Total de tareas: {{ estadisticas_tareas.total }}</p>
+    {% if estadisticas_tareas.primera is None %}
+        <p class="vacio">Todavía no hay tareas creadas.</p>
+    {% else %}
+        <p>Primera tarea creada: {{ estadisticas_tareas.primera|date:"d/m/Y" }}</p>
+        <p>Última tarea creada: {{ estadisticas_tareas.ultima|date:"d/m/Y" }}</p>
+    {% endif %}
+</div>
+
+<div class="tarjeta">
+    <h2>Comentarios</h2>
+    <p>Total de comentarios: {{ estadisticas_comentarios.total }}</p>
+    {% if estadisticas_comentarios.total >= 1 %}
+        <p>El proyecto tiene actividad en los comentarios.</p>
+    {% else %}
+        <p class="vacio">Nadie ha comentado todavía.</p>
+    {% endif %}
+</div>
+
+<div class="tarjeta">
+    <h2>Asignaciones</h2>
+    <p>Total de asignaciones: {{ estadisticas_asignaciones.total }}</p>
+    {% if estadisticas_asignaciones.primera is not None %}
+        <p>Primera asignación: {{ estadisticas_asignaciones.primera|date:"d/m/Y" }}</p>
+        <p>Última asignación: {{ estadisticas_asignaciones.ultima|date:"d/m/Y" }}</p>
+    {% else %}
+        <p class="vacio">Todavía no hay asignaciones.</p>
+    {% endif %}
+</div>
+
+<div class="tarjeta">
+    <h2>Listado de tareas</h2>
+    <ul>
+    {% for t in proyecto.tareas.all %}
+        {% include 'parciales/tarea_proyecto_li.html' with tarea=t %}
+    {% empty %}
+        <li class="vacio">Este proyecto no tiene tareas.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<a href="{% url 'index' %}">Volver al inicio</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block cabecera %}
+    <h1>Error 404</h1>
+{% endblock %}
+
+{% block contenido %}
+<div class="tarjeta">
+    <p>La página que buscas no existe.</p>
+    <a href="{% url 'index' %}">Volver al inicio</a>
+</div>
+{% endblock %}
